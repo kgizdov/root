@@ -33,8 +33,8 @@ depends=('cfitsio'  # for /usr/include/fitsio2.h and for /usr/lib/libcfitsio.so 
 # 'xorg-fonts-75dpi'  # not needed for now
 # 'gcc-fortran'  # not needed for now
 'libiodbc'
-'gtk-update-icon-cache'
-'libafterimage')
+'gtk-update-icon-cache')
+# 'libafterimage')
 install='root.install'
 options=('!emptydirs')
 source=("https://root.cern.ch/download/root_v${pkgver}.source.tar.gz"
