@@ -15,15 +15,19 @@ depends=('cfitsio'  # for /usr/include/fitsio2.h and for /usr/lib/libcfitsio.so 
 'desktop-file-utils'
 'fftw'
 'ftgl'
+# 'gcc-fortran'  # not needed for now
 'giflib'
 'glew'
 'graphviz'  # for /usr/include/graphviz/gvc.h and for /usr/lib/libgvc.so -- for gviz=ON
 'gsl'
+'gtk-update-icon-cache'
 'intel-tbb'  # unlisted optional dependency -- for builtin_tbb=OFF and tbb=ON
+'libafterimage'  # for asimage=ON
 'libmysqlclient'
 'libldap'  # for /usr/include/ldap.h and for /usr/lib/libldap.so -- for ldap=ON
+'libiodbc'
 'mesa'  # for /usr/include/GL/gl.h and for /usr/lib/libGL.so -- for opengl=ON (OpenGL support, requires libGL and libGLU)
-'mesa-libgl'  # unlisted optional dependency -- for opengl=ON (OpenGL support, requires libGL and libGLU)
+'nvidia-libgl'  # unlisted optional dependency -- for opengl=ON (OpenGL support, requires libGL and libGLU)
 'postgresql-libs'
 'python'
 'pythia'  # for pythia8=ON
@@ -31,10 +35,7 @@ depends=('cfitsio'  # for /usr/include/fitsio2.h and for /usr/lib/libcfitsio.so 
 'shared-mime-info'
 'xmlrpc-c'
 # 'xorg-fonts-75dpi'  # not needed for now
-# 'gcc-fortran'  # not needed for now
-'libiodbc'
-'gtk-update-icon-cache')
-# 'libafterimage')
+)
 install='root.install'
 options=('!emptydirs')
 source=("https://root.cern.ch/download/root_v${pkgver}.source.tar.gz"
@@ -50,7 +51,7 @@ md5sums=('55a2f98dd4cea79c9c4e32407c2d6d17'
          'e2cf69b204192b5889ceb5b4dedc66f7'
          '1777520d65cc545b5416ee2fed0cd45c'
          'f36f7bff97ed7232d8534c2ef166b2bf'
-         'e622aeca4136cea44bcac7345561407b')
+         'f5eea723c59dfc311cdda838500dc334')
 
 prepare(){
 	## https://sft.its.cern.ch/jira/browse/ROOT-6924
