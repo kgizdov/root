@@ -16,16 +16,20 @@ depends=('desktop-file-utils'
 'ftgl'
 'giflib'
 'glew'
-'graphviz'
+'graphviz'  # for /usr/include/graphviz/gvc.h and for /usr/lib/libgvc.so -- for gviz=ON
 'gsl'
+'intel-tbb'  # unlisted optional dependency -- for builtin_tbb=OFF and tbb=ON
 'libmysqlclient'
+'libldap'  # for /usr/include/ldap.h and for /usr/lib/libldap.so -- for ldap=ON
+'mesa'  # for /usr/include/GL/gl.h and for /usr/lib/libGL.so -- for opengl=ON (OpenGL support, requires libGL and libGLU)
+'mesa-libgl'  # unlisted optional dependency -- for opengl=ON (OpenGL support, requires libGL and libGLU)
 'postgresql-libs'
 'python'
 'unixodbc'
 'shared-mime-info'
 'xmlrpc-c'
-'xorg-fonts-75dpi'
-'gcc-fortran'
+# 'xorg-fonts-75dpi'  # not needed for now
+# 'gcc-fortran'  # not needed for now
 'libiodbc'
 'gtk-update-icon-cache'
 'libafterimage')
