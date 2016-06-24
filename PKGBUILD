@@ -11,7 +11,8 @@ arch=('i686' 'x86_64')
 url='http://root.cern.ch'
 license=('LGPL2.1')
 makedepends=('cmake')
-depends=('desktop-file-utils'
+depends=('cfitsio'  # for /usr/include/fitsio2.h and for /usr/lib/libcfitsio.so -- for fitsio=ON
+'desktop-file-utils'
 'fftw'
 'ftgl'
 'giflib'
@@ -25,6 +26,7 @@ depends=('desktop-file-utils'
 'mesa-libgl'  # unlisted optional dependency -- for opengl=ON (OpenGL support, requires libGL and libGLU)
 'postgresql-libs'
 'python'
+'pythia'  # for pythia8=ON
 'unixodbc'
 'shared-mime-info'
 'xmlrpc-c'
@@ -48,7 +50,7 @@ md5sums=('55a2f98dd4cea79c9c4e32407c2d6d17'
          'e2cf69b204192b5889ceb5b4dedc66f7'
          '1777520d65cc545b5416ee2fed0cd45c'
          'f36f7bff97ed7232d8534c2ef166b2bf'
-         '23b58c1a04895db427e2b4dbd6ee037e')
+         'e622aeca4136cea44bcac7345561407b')
 
 prepare(){
 	## https://sft.its.cern.ch/jira/browse/ROOT-6924
