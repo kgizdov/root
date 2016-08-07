@@ -2,10 +2,11 @@
 # Contributor: Scott Lawrence <bytbox@gmail.com>
 # Contributor: Thomas Dziedzic < gostrc at gmail >
 # Contributor: Sebastian Voecking <voeck@web.de>
+# Contributor: Konstantin Gizdov <kgizdov@gmail.com>
 
 pkgname=root
-pkgver=6.06.04
-pkgrel=2
+pkgver=6.06.06
+pkgrel=1
 pkgdesc='C++ data analysis framework and interpreter from CERN.'
 arch=('i686' 'x86_64')
 url='http://root.cern.ch'
@@ -26,6 +27,7 @@ depends=('cfitsio'  # for /usr/include/fitsio2.h and for /usr/lib/libcfitsio.so 
 'libmysqlclient'
 'libldap'  # for /usr/include/ldap.h and for /usr/lib/libldap.so -- for ldap=ON
 'libiodbc'
+'llvm-libs'  # for builtin_llvm=OFF
 'mesa'  # for /usr/include/GL/gl.h and for /usr/lib/libGL.so -- for opengl=ON (OpenGL support, requires libGL and libGLU)
 'mesa-libgl'  # unlisted optional dependency -- for opengl=ON (OpenGL support, requires libGL and libGLU)
 'postgresql-libs'
@@ -45,13 +47,21 @@ source=("https://root.cern.ch/download/root_v${pkgver}.source.tar.gz"
 'python3.diff'
 'call_PyErr_Clear_if_no_such_attribute.patch'
 'settings.cmake')
-md5sums=('55a2f98dd4cea79c9c4e32407c2d6d17'
+md5sums=('4308449892210c8d36e36924261fea26'
          '0e883ad44f99da9bc7c23bc102800b62'
          'efd06bfa230cc2194b38e0c8939e72af'
          'e2cf69b204192b5889ceb5b4dedc66f7'
          '1777520d65cc545b5416ee2fed0cd45c'
          'f36f7bff97ed7232d8534c2ef166b2bf'
-         'f5eea723c59dfc311cdda838500dc334')
+         'e91d34e76bbe9f5015fa0b9634efdf74')
+
+sha256sums=('0a7d702a130a260c72cb6ea754359eaee49a8c4531b31f23de0bfcafe3ce466b'
+            '71ed39f7e5a605a6a02e3d0ba79c997b8e7f02551898c27112eb78f07d9d8244'
+            '6a4ef7b32710d414ee47d16310b77b95e4cf1d3550209cf8a41d38a945d05e5f'
+            'b103d46705883590d9e07aafb890ec1150f63dc2ca5f40d67e6ebef49a6d0a32'
+            'd4cc3916aca17d59cac62ac52a760f72956e4a303cb486c73f5dfb30a7a31984'
+            '437ed0fb2c46d5ca8e37cc689f87dfe12429f6a243d4e5cf2d395a177de7e90f'
+            '9d4a69d6fe31b36c3c9a9ed8d4655e13d416b31ca9b615c89456e1e17a522658')
 
 prepare(){
 	## https://sft.its.cern.ch/jira/browse/ROOT-6924
@@ -99,4 +109,3 @@ package() {
 
 	rm -rf ${pkgdir}/etc/root/daemons
 }
-
