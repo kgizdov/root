@@ -1,8 +1,9 @@
 set (CMAKE_BUILD_TYPE Release CACHE STRING "" FORCE)
-set (CMAKE_C_FLAGS "-pipe -fstack-protector-strong -O2 -march=native -mtune=native" CACHE STRING "" FORCE)
-set (CMAKE_CXX_FLAGS "-D_GLIBCXX_USE_CXX11_ABI=0 -pipe -fstack-protector-strong -O2 -march=native" CACHE STRING "" FORCE)
-set (CMAKE_INSTALL_PREFIX /usr CACHE PATH "" FORCE)
+set (CMAKE_C_FLAGS "-pthread -pipe -fstack-protector-strong -O2 -march=native -mtune=native" CACHE STRING "" FORCE)
+set (CMAKE_CXX_FLAGS "-D_GLIBCXX_USE_CXX11_ABI=0 -pthread -pipe -fstack-protector-strong -O2 -march=native" CACHE STRING "" FORCE)
+set (CMAKE_SHARED_LINKER_FLAGS "-pthread -Wl,--no-undefined" CACHE STRING "" FORCE)
 set (BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)  # this option is currently incompatible
+set (CMAKE_INSTALL_PREFIX /usr CACHE PATH "" FORCE)
 set (CMAKE_INSTALL_SYSCONFDIR /etc CACHE PATH "" FORCE)
 set (CMAKE_INSTALL_DATAROOTDIR /usr/share CACHE PATH "" FORCE)
 set (asimage ON CACHE BOOL "" FORCE)
