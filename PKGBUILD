@@ -64,11 +64,11 @@ sha256sums=('0a7d702a130a260c72cb6ea754359eaee49a8c4531b31f23de0bfcafe3ce466b'
             '6a4ef7b32710d414ee47d16310b77b95e4cf1d3550209cf8a41d38a945d05e5f'
             'ba44545b12a26885e97cd7e0330a2d10d00cabc8a559825018822b28869ab179')
 prepare(){
-	## https://sft.its.cern.ch/jira/browse/ROOT-6924
-	cd ${pkgname}-${pkgver}
+    ## https://sft.its.cern.ch/jira/browse/ROOT-6924
+    cd ${pkgname}-${pkgver}
 
-	patch -p1 < ${srcdir}/python3.diff
-	2to3 -w etc/dictpch/makepch.py 2>&1 > /dev/null
+    patch -p1 < ${srcdir}/python3.diff
+    2to3 -w etc/dictpch/makepch.py 2>&1 > /dev/null
 
     ## https://sft.its.cern.ch/jira/browse/ROOT-7640
     patch -p1 < ${srcdir}/call_PyErr_Clear_if_no_such_attribute.patch
@@ -78,8 +78,8 @@ prepare(){
 }
 
 build() {
-	[ -d ${srcdir}/build ] || mkdir ${srcdir}/build
-	cd ${srcdir}/build
+    [ -d ${srcdir}/build ] || mkdir ${srcdir}/build
+    cd ${srcdir}/build
 
     cmake -C ${srcdir}/settings.cmake ${srcdir}/${pkgname}-${pkgver}
 
@@ -87,28 +87,28 @@ build() {
 }
 
 package() {
-	cd ${srcdir}/build
+    cd ${srcdir}/build
 
-	make DESTDIR=${pkgdir} install
+    make DESTDIR=${pkgdir} install
 
-	install -D ${srcdir}/root.sh \
-		${pkgdir}/etc/profile.d/root.sh
-	install -D ${srcdir}/rootd \
-		${pkgdir}/etc/rc.d/rootd
-	install -D -m644 ${srcdir}/root.xml \
-		${pkgdir}/usr/share/mime/packages/root.xml
+    install -D ${srcdir}/root.sh \
+        ${pkgdir}/etc/profile.d/root.sh
+    install -D ${srcdir}/rootd \
+        ${pkgdir}/etc/rc.d/rootd
+    install -D -m644 ${srcdir}/root.xml \
+        ${pkgdir}/usr/share/mime/packages/root.xml
 
-	install -D -m644 ${srcdir}/${pkgname}-${pkgver}/build/package/debian/root-system-bin.desktop.in \
-		${pkgdir}/usr/share/applications/root-system-bin.desktop
-	# replace @prefix@ with /usr for the desktop
-	sed -e 's_@prefix@_/usr_' -i ${pkgdir}/usr/share/applications/root-system-bin.desktop
+    install -D -m644 ${srcdir}/${pkgname}-${pkgver}/build/package/debian/root-system-bin.desktop.in \
+        ${pkgdir}/usr/share/applications/root-system-bin.desktop
+    # replace @prefix@ with /usr for the desktop
+    sed -e 's_@prefix@_/usr_' -i ${pkgdir}/usr/share/applications/root-system-bin.desktop
 
-	install -D -m644 ${srcdir}/${pkgname}-${pkgver}/build/package/debian/root-system-bin.png \
-		${pkgdir}/usr/share/icons/hicolor/48x48/apps/root-system-bin.png
+    install -D -m644 ${srcdir}/${pkgname}-${pkgver}/build/package/debian/root-system-bin.png \
+        ${pkgdir}/usr/share/icons/hicolor/48x48/apps/root-system-bin.png
 
-	# use a file that pacman can track instead of adding directly to ld.so.conf
-	install -d ${pkgdir}/etc/ld.so.conf.d
-	echo '/usr/lib/root' > ${pkgdir}/etc/ld.so.conf.d/root.conf
+    # use a file that pacman can track instead of adding directly to ld.so.conf
+    install -d ${pkgdir}/etc/ld.so.conf.d
+    echo '/usr/lib/root' > ${pkgdir}/etc/ld.so.conf.d/root.conf
 
-	rm -rf ${pkgdir}/etc/root/daemons
+    rm -rf ${pkgdir}/etc/root/daemons
 }
