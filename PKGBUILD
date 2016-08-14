@@ -32,10 +32,10 @@ depends=('cfitsio'  # for /usr/include/fitsio2.h and for /usr/lib/libcfitsio.so 
 'postgresql-libs'
 'python'
 'pythia'  # for pythia8=ON
-'unixodbc'
 'shared-mime-info'
+'tex-gyre-fonts'  # nicer substitution as per Arch Wiki
+'unixodbc'
 'xmlrpc-c'
-# 'xorg-fonts-75dpi'  # not needed for now
 )
 install='root.install'
 options=('!emptydirs')
