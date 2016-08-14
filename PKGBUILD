@@ -1,8 +1,8 @@
-# Maintainer: Frank Siegert <frank.siegert@googlemail.com>
+# Maintainer: Konstantin Gizdov <kgizdov@gmail.com>
+# Contributor: Frank Siegert <frank.siegert@googlemail.com>
 # Contributor: Scott Lawrence <bytbox@gmail.com>
 # Contributor: Thomas Dziedzic < gostrc at gmail >
 # Contributor: Sebastian Voecking <voeck@web.de>
-# Contributor: Konstantin Gizdov <kgizdov@gmail.com>
 
 pkgname=root
 pkgver=6.06.06
