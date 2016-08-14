@@ -23,8 +23,7 @@ pkgbase = root
 	depends = libldap
 	depends = libiodbc
 	depends = llvm-libs
-	depends = mesa
-	depends = mesa-libgl
+	depends = libgl
 	depends = postgresql-libs
 	depends = python
 	depends = pythia
@@ -55,3 +54,4 @@ pkgbase = root
 	sha256sums = 9d4a69d6fe31b36c3c9a9ed8d4655e13d416b31ca9b615c89456e1e17a522658
 
 pkgname = root
+
