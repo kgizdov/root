@@ -53,7 +53,6 @@ md5sums=('4308449892210c8d36e36924261fea26'
          '1777520d65cc545b5416ee2fed0cd45c'
          'f36f7bff97ed7232d8534c2ef166b2bf'
          'e91d34e76bbe9f5015fa0b9634efdf74')
-
 sha256sums=('0a7d702a130a260c72cb6ea754359eaee49a8c4531b31f23de0bfcafe3ce466b'
             '71ed39f7e5a605a6a02e3d0ba79c997b8e7f02551898c27112eb78f07d9d8244'
             '6a4ef7b32710d414ee47d16310b77b95e4cf1d3550209cf8a41d38a945d05e5f'
@@ -61,7 +60,6 @@ sha256sums=('0a7d702a130a260c72cb6ea754359eaee49a8c4531b31f23de0bfcafe3ce466b'
             'd4cc3916aca17d59cac62ac52a760f72956e4a303cb486c73f5dfb30a7a31984'
             '437ed0fb2c46d5ca8e37cc689f87dfe12429f6a243d4e5cf2d395a177de7e90f'
             '9d4a69d6fe31b36c3c9a9ed8d4655e13d416b31ca9b615c89456e1e17a522658')
-
 prepare(){
 	## https://sft.its.cern.ch/jira/browse/ROOT-6924
 	cd ${pkgname}-${pkgver}
