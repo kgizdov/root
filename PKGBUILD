@@ -27,7 +27,7 @@ depends=('cfitsio'  # for /usr/include/fitsio2.h and for /usr/lib/libcfitsio.so 
 'libmysqlclient'
 'libldap'  # for /usr/include/ldap.h and for /usr/lib/libldap.so -- for ldap=ON
 'libiodbc'
-'llvm-libs'  # for builtin_llvm=OFF
+# 'llvm'  # for builtin_llvm=OFF, but currently not possible
 'libgl'  # for /usr/include/GL/gl.h and for /usr/lib/libGL.so -- for opengl=ON (OpenGL support, requires libGL and libGLU)
 'postgresql-libs'
 'python'

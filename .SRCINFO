@@ -22,7 +22,6 @@ pkgbase = root
 	depends = libmysqlclient
 	depends = libldap
 	depends = libiodbc
-	depends = llvm-libs
 	depends = libgl
 	depends = postgresql-libs
 	depends = python
