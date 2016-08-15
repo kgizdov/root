@@ -6,6 +6,7 @@ set (BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)  # this option is currently inco
 set (CMAKE_INSTALL_PREFIX /usr CACHE PATH "" FORCE)
 set (CMAKE_INSTALL_SYSCONFDIR /etc CACHE PATH "" FORCE)
 set (CMAKE_INSTALL_DATAROOTDIR /usr/share CACHE PATH "" FORCE)
+set (LLVM_ENABLE_THREADS ON CACHE BOOL "" FORCE)  # try to workaround pthread issue
 set (asimage ON CACHE BOOL "" FORCE)
 set (builtin_afterimage OFF CACHE BOOL "" FORCE)
 set (builtin_ftgl OFF CACHE BOOL "" FORCE)
