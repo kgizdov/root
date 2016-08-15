@@ -15,20 +15,20 @@ makedepends=('cmake')
 depends=('cfitsio'  # for /usr/include/fitsio2.h and for /usr/lib/libcfitsio.so -- for fitsio=ON
 'desktop-file-utils'
 'fftw'
-'ftgl'
+'ftgl'  # also includes libgl, mesa, libldap
 # 'gcc-fortran'  # not needed for now
-'giflib'
+# 'giflib'  # already included
 'glew'
-'graphviz'  # for /usr/include/graphviz/gvc.h and for /usr/lib/libgvc.so -- for gviz=ON
+'graphviz'  # also includes giflib, for /usr/include/graphviz/gvc.h and for /usr/lib/libgvc.so -- for gviz=ON
 'gsl'
 'gtk-update-icon-cache'
 'intel-tbb'  # unlisted optional dependency -- for builtin_tbb=OFF and tbb=ON
 'libafterimage'  # for asimage=ON
-'libmysqlclient'
-'libldap'  # for /usr/include/ldap.h and for /usr/lib/libldap.so -- for ldap=ON
+# 'libgl'  # already included for /usr/include/GL/gl.h and for /usr/lib/libGL.so -- for opengl=ON
 'libiodbc'
+# 'libldap'  # already included, for /usr/include/ldap.h and for /usr/lib/libldap.so -- for ldap=ON
+'libmysqlclient'
 # 'llvm'  # for builtin_llvm=OFF, but currently not possible
-'libgl'  # for /usr/include/GL/gl.h and for /usr/lib/libGL.so -- for opengl=ON (OpenGL support, requires libGL and libGLU)
 'postgresql-libs'
 'python'
 'pythia'  # for pythia8=ON
