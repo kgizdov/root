@@ -24,6 +24,7 @@ pkgbase = root
 	depends = python
 	depends = pythia
 	depends = shared-mime-info
+	depends = sqlite
 	depends = tex-gyre-fonts
 	depends = unixodbc
 	depends = xmlrpc-c

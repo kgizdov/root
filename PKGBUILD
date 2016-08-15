@@ -33,6 +33,7 @@ depends=('cfitsio'  # for /usr/include/fitsio2.h and for /usr/lib/libcfitsio.so 
 'python'
 'pythia'  # for pythia8=ON
 'shared-mime-info'
+'sqlite'
 'tex-gyre-fonts'  # nicer substitution as per Arch Wiki
 'unixodbc'
 'xmlrpc-c'
