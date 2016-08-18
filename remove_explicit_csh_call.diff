@@ -1,0 +1,18 @@
+diff -aur root-6.06.06-old/interpreter/llvm/src/utils/makellvm root-6.06.06/interpreter/llvm/src/utils/makellvm
+--- root-6.06.06-old/interpreter/llvm/src/utils/makellvm	2016-08-18 15:55:41.786774341 +0100
++++ root-6.06.06/interpreter/llvm/src/utils/makellvm	2016-08-18 15:56:14.887013430 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/csh -f
++#!/bin/sh -f
+ 
+ set pstatus = 0
+ onintr cleanup
+@@ -130,7 +130,7 @@
+ set CMD = "make $GMAKE_OPTS && (cd $LLVMDIR/tools/$EXEC && make $GMAKE_OPTS)"
+ 
+ if ($doit == 1) then
+-    csh -f -c "$CMD"
++    sh -f -c "$CMD"
+     set pstatus = $?
+ else
+     echo '(NOT EXECUTING) COMMAND:'
