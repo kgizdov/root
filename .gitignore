@@ -1,3 +1,6 @@
+src/
+pkg/
+*.log
 *.old
 *.pkg.tar.xz
 *.source.tar.gz

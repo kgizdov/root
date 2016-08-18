@@ -6,7 +6,7 @@
 
 pkgname=root
 pkgver=6.06.06
-pkgrel=1
+pkgrel=3
 pkgdesc='C++ data analysis framework and interpreter from CERN.'
 arch=('i686' 'x86_64')
 url='http://root.cern.ch'
@@ -16,7 +16,7 @@ depends=('cfitsio'  # for /usr/include/fitsio2.h and for /usr/lib/libcfitsio.so 
 'desktop-file-utils'
 'fftw'
 'ftgl'  # also includes libgl, mesa, libldap
-# 'gcc-fortran'  # not needed for now
+# 'gcc-fortran'  # not needed
 # 'giflib'  # already included
 'glew'
 'graphviz'  # also includes giflib, for /usr/include/graphviz/gvc.h and for /usr/lib/libgvc.so -- for gviz=ON
@@ -38,12 +38,16 @@ depends=('cfitsio'  # for /usr/include/fitsio2.h and for /usr/lib/libcfitsio.so 
 'unixodbc'
 'xmlrpc-c'
 )
-install='root.install'
+optdepends=('gcc-fortran: Enable the Fortran components of ROOT'
+            'tcsh: Legacy CSH support'
+)
+#install='root.install'
 options=('!emptydirs')
 source=("https://root.cern.ch/download/root_v${pkgver}.source.tar.gz"
 'call_PyErr_Clear_if_no_such_attribute.patch'
 'disable-gcc-abi-check.diff'
 'python3.diff'
+'remove_explicit_csh_call.diff'
 'root.sh'
 'root.xml'
 'rootd'
@@ -52,18 +56,20 @@ md5sums=('4308449892210c8d36e36924261fea26'
          'f36f7bff97ed7232d8534c2ef166b2bf'
          '5a4a67f59d553cf86d5b09fdfb204352'
          '6e5b69f1396f84727477cb1bbcc71410'
+         'a8290655b7deb49b0f886d00c57ac913'
          '0e883ad44f99da9bc7c23bc102800b62'
          'e2cf69b204192b5889ceb5b4dedc66f7'
          'efd06bfa230cc2194b38e0c8939e72af'
-         '45a3f2218b3cbd14e8be795e2b9ae05e')
+         '5ee6668602c02c0f2451f32f75336162')
 sha256sums=('0a7d702a130a260c72cb6ea754359eaee49a8c4531b31f23de0bfcafe3ce466b'
             '437ed0fb2c46d5ca8e37cc689f87dfe12429f6a243d4e5cf2d395a177de7e90f'
             'e03fff4accf7cee4e7329b305f1e0df7bf804dbced08d52566af789bc77ea0b0'
             'ddf9bd918ba389564841515ca22216d65d6e32f2aa46fbc3782b87f06ff48766'
+            '5788f54c88e7cdba8cc23f0322e24068f5bfb785e699d4f93a5558e40aaa8783'
             '71ed39f7e5a605a6a02e3d0ba79c997b8e7f02551898c27112eb78f07d9d8244'
             'b103d46705883590d9e07aafb890ec1150f63dc2ca5f40d67e6ebef49a6d0a32'
             '6a4ef7b32710d414ee47d16310b77b95e4cf1d3550209cf8a41d38a945d05e5f'
-            '9970f0fea0238d7b416084b4f6e626212845c05c40d52e0d1b452d970717e68f')
+            '01cfa48ed84ae3c32f9166eb2965cf588047f55b134b172a578317d30108bccb')
 prepare(){
     ## https://sft.its.cern.ch/jira/browse/ROOT-6924
     cd ${pkgname}-${pkgver}
@@ -76,6 +82,9 @@ prepare(){
 
     ## disable check newly introduced in 6.06.06
     patch -p1 < ${srcdir}/disable-gcc-abi-check.diff
+
+    ## makellvm needs to be shell agnostic
+    patch -p1 < ${srcdir}/remove_explicit_csh_call.diff
 }
 
 build() {
