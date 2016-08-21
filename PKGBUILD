@@ -60,7 +60,7 @@ md5sums=('4308449892210c8d36e36924261fea26'
          '0e883ad44f99da9bc7c23bc102800b62'
          'e2cf69b204192b5889ceb5b4dedc66f7'
          'f973e17f573f0f313395d34d2e82eeb6'
-         '1db151506dc1fc5cc735cae33266922d')
+         'db459cdf69b7eedc0f17f67387711500')
 sha256sums=('0a7d702a130a260c72cb6ea754359eaee49a8c4531b31f23de0bfcafe3ce466b'
             '437ed0fb2c46d5ca8e37cc689f87dfe12429f6a243d4e5cf2d395a177de7e90f'
             'e03fff4accf7cee4e7329b305f1e0df7bf804dbced08d52566af789bc77ea0b0'
@@ -69,7 +69,7 @@ sha256sums=('0a7d702a130a260c72cb6ea754359eaee49a8c4531b31f23de0bfcafe3ce466b'
             '71ed39f7e5a605a6a02e3d0ba79c997b8e7f02551898c27112eb78f07d9d8244'
             'b103d46705883590d9e07aafb890ec1150f63dc2ca5f40d67e6ebef49a6d0a32'
             '3c45b03761d5254142710b7004af0077f18efece7c95511910140d0542c8de8a'
-            '2fe5bde392c5345f3071c830569b0848b64da12b5b7987617db17baa3db2df4b')
+            '6eb8d8833babbfd1f657f79082333bc83294180b6952db5865bc24eaf21f2e27')
 prepare(){
     ## https://sft.its.cern.ch/jira/browse/ROOT-6924
     cd ${pkgname}-${pkgver}
@@ -91,6 +91,9 @@ build() {
     [ -d ${srcdir}/build ] || mkdir ${srcdir}/build
     cd ${srcdir}/build
 
+    CFLAGS="${CFLAGS} -pthread" \
+    CXXFLAGS="${CXXFLAGS} -pthread -D_GLIBCXX_USE_CXX11_ABI=0" \
+    LDFLAGS="${LDFLAGS} -pthread -Wl,--no-undefined" \
     cmake -C ${srcdir}/settings.cmake ${srcdir}/${pkgname}-${pkgver}
 
     make ${MAKEFLAGS}
