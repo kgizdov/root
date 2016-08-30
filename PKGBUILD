@@ -29,8 +29,8 @@ depends=('cfitsio'  # for /usr/include/fitsio2.h and for /usr/lib/libcfitsio.so 
 'libmysqlclient'
 # 'llvm'  # for builtin_llvm=OFF, but currently not possible
 'postgresql-libs'
-'python'
 'pythia'  # for pythia8=ON
+'python'
 'sqlite'
 'tex-gyre-fonts'  # nicer substitution as per Arch Wiki
 'unixodbc'
