@@ -49,14 +49,6 @@ source=("https://root.cern.ch/download/root_v${pkgver}.source.tar.gz"
 'root.xml'
 'rootd'
 'settings.cmake')
-md5sums=('4308449892210c8d36e36924261fea26'
-         'f36f7bff97ed7232d8534c2ef166b2bf'
-         '5a4a67f59d553cf86d5b09fdfb204352'
-         '6e5b69f1396f84727477cb1bbcc71410'
-         '0e883ad44f99da9bc7c23bc102800b62'
-         'e2cf69b204192b5889ceb5b4dedc66f7'
-         'f973e17f573f0f313395d34d2e82eeb6'
-         'db459cdf69b7eedc0f17f67387711500')
 sha256sums=('0a7d702a130a260c72cb6ea754359eaee49a8c4531b31f23de0bfcafe3ce466b'
             '437ed0fb2c46d5ca8e37cc689f87dfe12429f6a243d4e5cf2d395a177de7e90f'
             'e03fff4accf7cee4e7329b305f1e0df7bf804dbced08d52566af789bc77ea0b0'
