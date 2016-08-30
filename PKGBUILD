@@ -56,7 +56,7 @@ sha256sums=('0a7d702a130a260c72cb6ea754359eaee49a8c4531b31f23de0bfcafe3ce466b'
             '71ed39f7e5a605a6a02e3d0ba79c997b8e7f02551898c27112eb78f07d9d8244'
             'b103d46705883590d9e07aafb890ec1150f63dc2ca5f40d67e6ebef49a6d0a32'
             '3c45b03761d5254142710b7004af0077f18efece7c95511910140d0542c8de8a'
-            '6eb8d8833babbfd1f657f79082333bc83294180b6952db5865bc24eaf21f2e27')
+            '863bc94a2976c7a0bf5cf9781ecbdacb1c54be2443ca8b1b62e1ef369ecb542e')
 prepare(){
     ## https://sft.its.cern.ch/jira/browse/ROOT-6924
     cd ${pkgname}-${pkgver}
