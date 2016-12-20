@@ -41,6 +41,7 @@ optdepends=('blas: Optional extensions to TMVA'
 options=('!emptydirs')
 install=root.install
 source=("https://root.cern.ch/download/root_v${pkgver}.source.tar.gz"
+'JupyROOT_encoding.patch'
 'JupyROOT_fix.patch'
 'root.install'
 'root.sh'
@@ -48,6 +49,7 @@ source=("https://root.cern.ch/download/root_v${pkgver}.source.tar.gz"
 'rootd'
 'settings.cmake')
 sha256sums=('131c50a81e72a1cd2b2825c66dbe3916c23b28006e84f5a028baed4c72d86014'
+            'dbf08ee3b506a2089f58d55ec9b1e6b77f337a6d2ebbb081e69cf729e531da3f'
             'a17309295f998ed826dcbf1b5d04de7ed44d64c35221806c75b775796578783d'
             'f1796729b0403026382bca43329692f5356c8ec46fc2c09f799a8b3d12d49a6f'
             '9d1f8e7ad923cb5450386edbbce085d258653c0160419cdd6ff154542cc32bd7'
