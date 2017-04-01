@@ -5,6 +5,6 @@ Base AUR package available [here](https://aur.archlinux.org/packages/root/)
 
 AUR package with Pythia8 and XRootD available [here](https://aur.archlinux.org/packages/root-extra/)
 
-[XRootD](https://aur.archlinux.org/packages/xrootd-abi0/)
+[XRootD](https://aur.archlinux.org/packages/xrootd/)
 
-[Pythia8](https://aur.archlinux.org/packages/pythia8/)
+[Pythia8](https://aur.archlinux.org/packages/pythia/)

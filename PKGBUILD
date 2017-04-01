@@ -13,74 +13,77 @@ url='http://root.cern.ch'
 license=('LGPL2.1')
 makedepends=('cmake')
 depends=('cfitsio'
-'fftw'
-'ftgl'
-'gl2ps'
-'glew'
-'graphviz'
-'gsl'
-'hicolor-icon-theme'
-'intel-tbb'
-'libafterimage'
-'libiodbc'
-'libmysqlclient'
-'postgresql-libs'
-'pythia8'
-'python'
-'sqlite'
-'tex-gyre-fonts'  # solve the pixelized font problem as per Arch Wiki
-'unixodbc'
-'unuran'
-'xmlrpc-c'
-'xrootd-abi0'
-)
+         'fftw'
+         'ftgl'
+         'gl2ps'
+         'glew'
+         'graphviz'
+         'gsl'
+         'hicolor-icon-theme'
+         'intel-tbb'
+         'libafterimage'
+         'libiodbc'
+         'libmysqlclient'
+         'postgresql-libs'
+         'pythia>=8.2.23-3'
+         'python'
+         'sqlite'
+         'tex-gyre-fonts'  # solve the pixelized font problem as per Arch Wiki
+         'unixodbc'
+         'unuran'
+         'xmlrpc-c'
+         'xrootd>=4.6.0-2')
 optdepends=('blas: Optional extensions to TMVA'
             'gcc-fortran: Enable the Fortran components of ROOT'
-            'tcsh: Legacy CSH support'
-)
+            'tcsh: Legacy CSH support')
 options=('!emptydirs')
 install=root.install
 source=("https://root.cern.ch/download/root_v${pkgver}.source.tar.gz"
-'JupyROOT_encoding.patch'
-'JupyROOT_fix.patch'
-'root.install'
-'root.sh'
-'root.xml'
-'rootd'
-'settings.cmake')
+        'JupyROOT_encoding.patch'
+        'JupyROOT_fix.patch'
+        'root.install'
+        'root.sh'
+        'root.xml'
+        'rootd'
+        'settings.cmake')
 sha256sums=('ea31b047ba6fc04b0b312667349eaf1498a254ccacd212144f15ffcb3f5c0592'
             'dbf08ee3b506a2089f58d55ec9b1e6b77f337a6d2ebbb081e69cf729e531da3f'
             'a17309295f998ed826dcbf1b5d04de7ed44d64c35221806c75b775796578783d'
             'f1796729b0403026382bca43329692f5356c8ec46fc2c09f799a8b3d12d49a6f'
             '9d1f8e7ad923cb5450386edbbce085d258653c0160419cdd6ff154542cc32bd7'
-            'b103d46705883590d9e07aafb890ec1150f63dc2ca5f40d67e6ebef49a6d0a32'
+            '50c08191a5b281a39aa05ace4feb8d5405707b4c54a5dcba061f954649c38cb0'
             '3c45b03761d5254142710b7004af0077f18efece7c95511910140d0542c8de8a'
             '40503aebd8a0ab5380a24d69145cf7d93d483d4d9330e4c23fb04e55c9ed2caf')
-prepare(){
+prepare() {
     cd ${pkgname}-${pkgver}
 
+    msg2 'Applying patches...'
     # Fix JupyROOT issues until upstream releases arrive
     patch -p1 -i ${srcdir}/JupyROOT_encoding.patch
-    # patch -p1 -i ${srcdir}/JupyROOT_fix.patch
+    patch -p1 -i ${srcdir}/JupyROOT_fix.patch
 
+    msg2 'Adjusting to Python3...'
     2to3 -w etc/dictpch/makepch.py 2>&1 > /dev/null
 }
 
 build() {
-    [ -d ${srcdir}/build ] || mkdir ${srcdir}/build
+    mkdir -p ${srcdir}/build
     cd ${srcdir}/build
 
+    msg2 'Configuring...'
     CFLAGS="${CFLAGS} -pthread" \
     CXXFLAGS="${CXXFLAGS} -pthread" \
     LDFLAGS="${LDFLAGS} -pthread -Wl,--no-undefined" \
     cmake -C ${srcdir}/settings.cmake ${srcdir}/${pkgname}-${pkgver}
 
+    msg2 'Compiling...'
     make ${MAKEFLAGS}
 }
 
 package() {
     cd ${srcdir}/build
 
+    msg2 'Installing...'
     make DESTDIR=${pkgdir} install
 
     install -D ${srcdir}/root.sh \
@@ -101,9 +104,11 @@ package() {
     install -D -m644 ${srcdir}/${pkgname}-${pkgver}/build/package/debian/root-system-bin.png \
         ${pkgdir}/usr/share/icons/hicolor/48x48/apps/root-system-bin.png
 
+    msg2 'Updating system config...'
     # use a file that pacman can track instead of adding directly to ld.so.conf
     install -d ${pkgdir}/etc/ld.so.conf.d
     echo '/usr/lib/root' > ${pkgdir}/etc/ld.so.conf.d/root.conf
 
+    msg2 'Cleaning up...'
     rm -rf ${pkgdir}/etc/root/daemons
 }
