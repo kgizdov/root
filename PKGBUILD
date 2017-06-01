@@ -6,7 +6,7 @@
 
 pkgname=root
 pkgver=6.08.06
-pkgrel=1
+pkgrel=2
 pkgdesc='C++ data analysis framework and interpreter from CERN with extra features enabled.'
 arch=('i686' 'x86_64')
 url='http://root.cern.ch'
@@ -23,7 +23,7 @@ depends=('cfitsio'
          'intel-tbb'
          'libafterimage'
          'libiodbc'
-         'libmysqlclient'
+         'libmariadbclient'
          'postgresql-libs'
          'pythia>=8.2.23-3'
          'python'
