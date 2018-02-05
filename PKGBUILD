@@ -5,7 +5,7 @@
 # Contributor: Sebastian Voecking < voeck at web dot de >
 
 pkgname=root
-pkgver=6.10.02
+pkgver=6.12.04
 pkgrel=1
 pkgdesc='C++ data analysis framework and interpreter from CERN with extra features enabled.'
 arch=('i686' 'x86_64')
@@ -13,6 +13,7 @@ url='http://root.cern.ch'
 license=('LGPL2.1')
 makedepends=('cmake')
 depends=('cfitsio'
+         'fcgi'
          'fftw'
          'ftgl'
          'gl2ps'
@@ -34,8 +35,12 @@ depends=('cfitsio'
          'xmlrpc-c'
          'xrootd>=4.6.0-2')
 optdepends=('blas: Optional extensions to TMVA'
+            'go: Go language support'
             'gcc-fortran: Enable the Fortran components of ROOT'
-            'tcsh: Legacy CSH support')
+            'ocaml: OCAML support'
+            'python-numpy: numpy bindings'
+            'tcsh: Legacy CSH support'
+            'z3: Z3 Theorem prover support')
 options=('!emptydirs')
 install=root.install
 source=("https://root.cern.ch/download/root_v${pkgver}.source.tar.gz"
@@ -44,12 +49,12 @@ source=("https://root.cern.ch/download/root_v${pkgver}.source.tar.gz"
         'root.xml'
         'rootd'
         'settings.cmake')
-sha256sums=('6c268d2e483a0946c3b065e8e2b070141475416042086d14ec76dd7ed248d7e7'
+sha256sums=('f438f2ae6e25496fa81df525935fb0bf2a403855d95c40b3e0f3a3e1e861a085'
             'f1796729b0403026382bca43329692f5356c8ec46fc2c09f799a8b3d12d49a6f'
             '9d1f8e7ad923cb5450386edbbce085d258653c0160419cdd6ff154542cc32bd7'
             '50c08191a5b281a39aa05ace4feb8d5405707b4c54a5dcba061f954649c38cb0'
             '3c45b03761d5254142710b7004af0077f18efece7c95511910140d0542c8de8a'
-            '40503aebd8a0ab5380a24d69145cf7d93d483d4d9330e4c23fb04e55c9ed2caf')
+            '0878ab24974c7548ddda5619d24d07d7cea14af92de2d8ed3ccef394feaf1d87')
 prepare() {
     cd "${pkgname}-${pkgver}"
 
@@ -86,6 +91,7 @@ package() {
 
     install -D -m644 "${srcdir}/${pkgname}-${pkgver}/build/package/debian/root-system-bin.desktop.in" \
         "${pkgdir}/usr/share/applications/root-system-bin.desktop"
+
     # replace @prefix@ with /usr for the desktop
     sed -e 's_@prefix@_/usr_' -i "${pkgdir}/usr/share/applications/root-system-bin.desktop"
 
