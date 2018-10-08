@@ -5,14 +5,16 @@
 # Contributor: Sebastian Voecking < voeck at web dot de >
 
 pkgname=root
-pkgver=6.12.06
+pkgver=6.14.04
 pkgrel=1
 pkgdesc='C++ data analysis framework and interpreter from CERN with extra features enabled.'
 arch=('i686' 'x86_64')
 url='http://root.cern.ch'
 license=('LGPL2.1')
-makedepends=('cmake')
-depends=('cfitsio'
+makedepends=('cmake'
+             'llvm50>=5.0.2-5')
+depends=('cern-vdt'
+         'cfitsio'
          'fcgi'
          'fftw'
          'ftgl'
@@ -33,12 +35,13 @@ depends=('cfitsio'
          'unixodbc'
          'unuran'
          'xmlrpc-c'
-         'xrootd>=4.6.0-2')
+         'xrootd>=4.6.0-2'
+         'xxhash>=0.6.5-1')
 optdepends=('blas: Optional extensions to TMVA'
             'go: Go language support'
             'gcc-fortran: Enable the Fortran components of ROOT'
             'ocaml: OCAML support'
-            'python-numpy: numpy bindings'
+            'python-numpy: numpy bindings for PyMVA'
             'tcsh: Legacy CSH support'
             'z3: Z3 Theorem prover support')
 options=('!emptydirs')
@@ -48,38 +51,43 @@ source=("https://root.cern.ch/download/root_v${pkgver}.source.tar.gz"
         'root.sh'
         'root.xml'
         'rootd'
-        'settings.cmake')
-sha256sums=('aedcfd2257806e425b9f61b483e25ba600eb0ea606e21262eafaa9dc745aa794'
+        'settings.cmake'
+        'exclude_clang_from_install_directive.patch'
+        'fix_tmva_numpy_dependency.patch')
+sha256sums=('463ec20692332a422cfb5f38c78bedab1c40ab4d81be18e99b50cf9f53f596cf'
             'f1796729b0403026382bca43329692f5356c8ec46fc2c09f799a8b3d12d49a6f'
             '9d1f8e7ad923cb5450386edbbce085d258653c0160419cdd6ff154542cc32bd7'
             '50c08191a5b281a39aa05ace4feb8d5405707b4c54a5dcba061f954649c38cb0'
             '3c45b03761d5254142710b7004af0077f18efece7c95511910140d0542c8de8a'
-            '0878ab24974c7548ddda5619d24d07d7cea14af92de2d8ed3ccef394feaf1d87')
+            '05c584402583ec85f813af83683b85bea33b58e103f25294c0c826de76a4baa2'
+            'f2d07ccfa65dc0db8b41e36b67cc4cf471a0dec318f0f9f883711c5d2c0e296b'
+            'bc0a31992c0da5004d6d9be8f0236e77185245f218ec49a6d86d9279c7bbb868')
 prepare() {
     cd "${pkgname}-${pkgver}"
 
-    msg2 'Adjusting to Python3...'
     2to3 -w etc/dictpch/makepch.py 2>&1 > /dev/null
-}
 
-build() {
+    patch -p1 -i "${srcdir}/exclude_clang_from_install_directive.patch"
+    patch -p1 -i "${srcdir}/fix_tmva_numpy_dependency.patch"
+
     mkdir -p "${srcdir}/build"
     cd "${srcdir}/build"
 
-    msg2 'Configuring...'
     CFLAGS="${CFLAGS} -pthread" \
     CXXFLAGS="${CXXFLAGS} -pthread" \
     LDFLAGS="${LDFLAGS} -pthread -Wl,--no-undefined" \
     cmake -C "${srcdir}/settings.cmake" "${srcdir}/${pkgname}-${pkgver}"
+}
 
-    msg2 'Compiling...'
+build() {
+    cd "${srcdir}/build"
+
     make ${MAKEFLAGS}
 }
 
 package() {
     cd "${srcdir}/build"
 
-    msg2 'Installing...'
     make DESTDIR="${pkgdir}" install
 
     install -D "${srcdir}/root.sh" \
@@ -101,11 +109,9 @@ package() {
     install -D -m644 "${srcdir}/${pkgname}-${pkgver}/build/package/debian/root-system-bin.png" \
         "${pkgdir}/usr/share/icons/hicolor/48x48/apps/root-system-bin.png"
 
-    msg2 'Updating system config...'
     # use a file that pacman can track instead of adding directly to ld.so.conf
     install -d "${pkgdir}/etc/ld.so.conf.d"
     echo '/usr/lib/root' > "${pkgdir}/etc/ld.so.conf.d/root.conf"
 
-    msg2 'Cleaning up...'
     rm -rf "${pkgdir}/etc/root/daemons"
 }

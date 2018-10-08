@@ -1,6 +1,6 @@
 pkgbase = root
 	pkgdesc = C++ data analysis framework and interpreter from CERN with extra features enabled.
-	pkgver = 6.12.06
+	pkgver = 6.14.04
 	pkgrel = 1
 	url = http://root.cern.ch
 	install = root.install
@@ -8,6 +8,8 @@ pkgbase = root
 	arch = x86_64
 	license = LGPL2.1
 	makedepends = cmake
+	makedepends = llvm50>=5.0.2-5
+	depends = cern-vdt
 	depends = cfitsio
 	depends = fcgi
 	depends = fftw
@@ -30,26 +32,31 @@ pkgbase = root
 	depends = unuran
 	depends = xmlrpc-c
 	depends = xrootd>=4.6.0-2
+	depends = xxhash>=0.6.5-1
 	optdepends = blas: Optional extensions to TMVA
 	optdepends = go: Go language support
 	optdepends = gcc-fortran: Enable the Fortran components of ROOT
 	optdepends = ocaml: OCAML support
-	optdepends = python-numpy: numpy bindings
+	optdepends = python-numpy: numpy bindings for PyMVA
 	optdepends = tcsh: Legacy CSH support
 	optdepends = z3: Z3 Theorem prover support
 	options = !emptydirs
-	source = https://root.cern.ch/download/root_v6.12.06.source.tar.gz
+	source = https://root.cern.ch/download/root_v6.14.04.source.tar.gz
 	source = root.install
 	source = root.sh
 	source = root.xml
 	source = rootd
 	source = settings.cmake
-	sha256sums = aedcfd2257806e425b9f61b483e25ba600eb0ea606e21262eafaa9dc745aa794
+	source = exclude_clang_from_install_directive.patch
+	source = fix_tmva_numpy_dependency.patch
+	sha256sums = 463ec20692332a422cfb5f38c78bedab1c40ab4d81be18e99b50cf9f53f596cf
 	sha256sums = f1796729b0403026382bca43329692f5356c8ec46fc2c09f799a8b3d12d49a6f
 	sha256sums = 9d1f8e7ad923cb5450386edbbce085d258653c0160419cdd6ff154542cc32bd7
 	sha256sums = 50c08191a5b281a39aa05ace4feb8d5405707b4c54a5dcba061f954649c38cb0
 	sha256sums = 3c45b03761d5254142710b7004af0077f18efece7c95511910140d0542c8de8a
-	sha256sums = 0878ab24974c7548ddda5619d24d07d7cea14af92de2d8ed3ccef394feaf1d87
+	sha256sums = 05c584402583ec85f813af83683b85bea33b58e103f25294c0c826de76a4baa2
+	sha256sums = f2d07ccfa65dc0db8b41e36b67cc4cf471a0dec318f0f9f883711c5d2c0e296b
+	sha256sums = bc0a31992c0da5004d6d9be8f0236e77185245f218ec49a6d86d9279c7bbb868
 
 pkgname = root
 
